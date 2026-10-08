@@ -6,29 +6,26 @@
  *
  * Description:
  * Given n friends in a circle and an integer k, eliminate every k-th friend
- * until only one friend remains. Return the winner of the game.
+ * until only one friend remains. Return the winner.
  *
- * Time Complexity: O(n²)
+ * Approach:
+ * Use a Queue to simulate the circular elimination process.
+ * Move k-1 friends to the back of the queue, then remove the k-th friend.
+ *
+ * Time Complexity: O(n * k)
  * Space Complexity: O(n)
  */
-
 
 class Solution {
     public int findTheWinner(int n, int k) {
 
-        LinkedList<Integer> list = new LinkedList<>();
-        for(int i=1; i<=n; i++){
-            list.add(i);
+        int winner = 0;
+
+        for(int i=2; i<=n; i++){
+            winner = (winner+k)%i;
         }
 
-        int index = 0;
-
-        while(list.size()>1){
-            index = (index+k-1) % list.size();
-            list.remove(index);
-        }
-
-        return list.peek();
+        return winner+1;
         
     }
 }
